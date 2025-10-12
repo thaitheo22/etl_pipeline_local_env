@@ -1,0 +1,9 @@
+customer_mock:
+  customer_id: [customerID, CustomerID, customer_ID, Customer_ID, customerid]
+  age: [Age, getAge, customerAge, customer_age, age]
+  job: [cutomer_job, customerJob, CustomerJob, job]
+  hobby: [customer_hobby, customerJob, CustomerJob, hobby]
+  address: [Address, customer_address, customerAddress]
+
+
+
