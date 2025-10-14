@@ -4,17 +4,19 @@ import sys
 import pathlib
 import shutil 
 import importlib
+
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
     
 import yaml 
 with open('table_config.yaml', 'r') as f: 
     yaml_config = yaml.safe_load(f)
+    
 
 
-def func_str():
-    pass
-    
-    
-    
+#=====================================================================================
+
 
 def get_file(folder_path, prefix):
     for file_name in os.listdir(folder_path): 
@@ -30,7 +32,27 @@ def move_archive(archvie_folder, fullpath_file):
 
 
 
+def get_function_str(func_str):
+    module_name, func_name = func_str.rsplit('.', 1)
+    module = importlib.import_module(module_name)
+    return getattr(module, func_name)
+    
 
+
+
+def run_etl(folder_path, prefix):
+    try:
+        file = get_file(folder_path, prefix)
+        if not file: 
+            logging.error('there is no file passed!')
+            return None
+        
+            
+        
+    except: 
+        
+        
+        
 
 
 

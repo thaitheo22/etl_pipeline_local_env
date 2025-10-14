@@ -95,8 +95,7 @@ def sql_to_df(query):
         print('there is something wrong when read sql')
         traceback.print_exc()
         print(e)
-        
-        
+             
         
 def sql_to_csv(query, file_path):
     _, engine_connect = pg_connection()
@@ -136,7 +135,7 @@ def df_to_sql(df, schema, tb_name, valid_col_dict):
         
     pg_connect, connect_str = pg_connection()
     
-    valid_df = delivery_tools.validate_df_columns(df, schema, tb_name, valid_col_dict)
+    valid_df = validate_df_columns(df, schema, tb_name, valid_col_dict)
 
     df_col = list(valid_df.columns)
     df_col = ','.join(tuple(df_col))

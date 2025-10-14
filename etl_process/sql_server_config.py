@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 # connect to postgresql 
 def pg_connection():
     
-    database = 'postgres'
+    database = 'project1'
     user = 'postgres'
     host = 'localhost'
     password = '123'
