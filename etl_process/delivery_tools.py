@@ -129,10 +129,14 @@ def df_to_sql(df, schema, tb_name, valid_col_dict):
 
     def adapt_numpy_int64(numpy_int64):
         return AsIs(int(numpy_int64))
-
+    
+    def adapt_numpy_datetime64(numpy_datetime64):
+        return AsIs(f"'{pd.Timestamp(numpy_datetime64).to_pydatetime()}'")
+    
     register_adapter(np.float64, adapt_numpy_float64)
     register_adapter(np.int64, adapt_numpy_int64)
-        
+    register_adapter(np.datetime64, adapt_numpy_datetime64)
+    
     pg_connect, connect_str = pg_connection()
     
     valid_df = validate_df_columns(df, schema, tb_name, valid_col_dict)
@@ -162,7 +166,21 @@ def df_to_sql(df, schema, tb_name, valid_col_dict):
     
     cursor.close()
     pg_connect.close()
-    
+
+
+# import yaml 
+# with open(r'C:\Users\admin\Desktop\local_env_ppeline_project\etl_process\etl_pipeline\validate_cols.yaml', 'r') as f: 
+#     tb_cols = yaml.safe_load(f)
+# with open(r'C:\Users\admin\Desktop\local_env_ppeline_project\etl_process\etl_pipeline\table_config.yaml', 'r') as f1: 
+#     table_config = yaml.safe_load(f1)
+#     tb_config = table_config['table_config']
+
+
+# import pandas as pd 
+# sys.path.append(os.path.abspath(r'C:\Users\admin\Desktop\local_env_ppeline_project\etl_process\etl_pipeline'))
+# import data_transform
+# df = data_transform.saleOrder_transform(r'C:\Users\admin\Desktop\local_env_ppeline_project\raw_data\saleOrder_20251005_135254.csv')
+# df_to_sql(df, tb_config['schema'], tb_config['table_name'], tb_cols['validate_columns'])
 
 
 '''

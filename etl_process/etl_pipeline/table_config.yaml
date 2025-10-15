@@ -2,7 +2,7 @@ table_config:
   raw_data_folder: C:\Users\admin\Desktop\local_env_ppeline_project\raw_data
   archive_folder: C:\Users\admin\Desktop\local_env_ppeline_project\archive
   archive_fail_folder: C:\Users\admin\Desktop\local_env_ppeline_project\archive_fail
-  transform_func:
+  transform_func: data_transform.saleOrder_transform
   prefix: saleOrder
   suffix: csv
   table_name: staging_sale_order
