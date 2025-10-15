@@ -1,10 +1,9 @@
-raw_data: C:\Users\admin\Desktop\local_env_ppeline_project\raw_data
-archive_folder: C:\Users\admin\Desktop\local_env_ppeline_project\archive
-archive_fail_folder: C:\Users\admin\Desktop\local_env_ppeline_project\archive_fail
-transform_func:
 table_config:
-  - index: 0
-    prefix: saleOrder
-    suffix: csv
-    table_name: 
-    schema: sale
+  raw_data_folder: C:\Users\admin\Desktop\local_env_ppeline_project\raw_data
+  archive_folder: C:\Users\admin\Desktop\local_env_ppeline_project\archive
+  archive_fail_folder: C:\Users\admin\Desktop\local_env_ppeline_project\archive_fail
+  transform_func:
+  prefix: saleOrder
+  suffix: csv
+  table_name: staging_sale_order
+  schema: sale
