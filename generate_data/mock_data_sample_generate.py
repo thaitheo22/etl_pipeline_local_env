@@ -149,9 +149,6 @@ saleperson_list = [
 'Kyle Smith',
 'Katelyn Wilkins',
 'Rebecca Blackburn',
-]
-
-saleperson_list2 = [
 'Robert Lee',
 'Paul Foster',
 'Caitlin Harvey',
@@ -166,9 +163,8 @@ saleperson_list2 = [
 'Jacob Mitchell',
 'Franklin Silva',
 'Kim Smith',
-'Ryan Morris'
+'Ryan Morris',
 ]
-
 
 #---------------------------------------------------------------------------------------------
 invoiceNum = []
@@ -187,62 +183,69 @@ orderDate = []
 shipInterval = []
 
 
-data_dict = {
-    "invoiceNum": invoiceNum,
-    "salePerson": salePerson,
-    "distributeChannel": distributeChannel,
-    "customerName": customerName,
-    "customerGender": customerGender,
-    "birthYear": birthYear,
-    "productName": productName,
-    "productColor": productColor,
-    "productSize": productSize,
-    "productCategory": productCategory,
-    "productQty": productQty,
-    "productUnitPrice": productUnitPrice,
-    "orderDate": orderDate,
-    "shipInterval": shipInterval
-}
+for count in range(10): 
 
+    data_dict = {
+        "invoiceNum": invoiceNum,
+        "salePerson": salePerson,
+        "distributeChannel": distributeChannel,
+        "customerName": customerName,
+        "customerGender": customerGender,
+        "birthYear": birthYear,
+        "productName": productName,
+        "productColor": productColor,
+        "productSize": productSize,
+        "productCategory": productCategory,
+        "productQty": productQty,
+        "productUnitPrice": productUnitPrice,
+        "orderDate": orderDate,
+        "shipInterval": shipInterval
+    }
 
+    for i in range(30000):
+        
+        invoiceNum.append(rstr.xeger(r'^\d{8}$'))
+        salePerson.append(random.choice(saleperson_list))
+        distributeChannel.append(random.choice([1,2,3,4,5,6,7,8,9,10,11,12])) # thêm giá trị vào đây
+        
+        customerName.append(fake.name())
+        
+        customerGender.append(random.choice(['F', 'M'])) 
+        
+        birthYear.append(rstr.xeger(r'^(?:19[6-9][0-9])|20(?:0[0-9]|1[0-5])$'))
+        
+        product_name = random.choice(Product.wearing_items)
+        productName.append(product_name)
+        
+        productColor.append(random.choice(Product.colors))
+        
+        productSize.append(random.choice(Product.sizes))
+        
+        productCategory.append(Product.reverse_category_ranges[product_name])
+        
+        productQty.append(random.choice(range(1,20)))
+        
+        productUnitPrice.append(Product.wearing_items_price[product_name])
 
-for i in range(10000):
+        orderDate.append(rstr.xeger(r'^(?:0[1-9]|1[0-2])/(?:0[1-9]|[1-2][0-9]|30|31)/(?:202[0-9])$')) # thêm ngày ở đây
+        
+        shipInterval.append(random.choice(range(2,9)))    
+        
     
-    invoiceNum.append(rstr.xeger(r'^\d{8}$'))
-    salePerson.append(random.choice(saleperson_list))
-    distributeChannel.append(random.choice([1,2,3,4,5,6,7,8,9])) # thêm giá trị vào đây
-    
-    
-    customerName.append(fake.name())
-    customerGender.append(random.choice(['F', 'M']))    
-    birthYear.append(rstr.xeger(r'^(?:19[6-9][0-9])|20(?:0[0-9]|1[0-5])$'))
-    
-    #-----
-    product_name = random.choice(Product.wearing_items)
-    productName.append(product_name)
-    #-----
-    
-    productColor.append(random.choice(Product.colors))
-    productSize.append(random.choice(Product.sizes))
-    
-    productCategory.append(Product.reverse_category_ranges[product_name])
-    
-    productQty.append(random.choice(range(1,9)))
-    productUnitPrice.append(Product.wearing_items_price[product_name])
+    import os, sys    
+    parent_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    raw_data_folder = os.path.join(parent_folder, 'raw_data')
 
-    orderDate.append(rstr.xeger(r'^(?:0[1-9]|1[0-2])/(?:0[1-9]|[1-2][0-9]|30|31)/(?:2024|2025|2026)$')) # thêm ngày ở đây
-    shipInterval.append(random.choice(range(2,9)))    
-    
-    
+    import pandas as pd 
+    from datetime import datetime
+    datetime_now = datetime.now().strftime('%Y%m%d_%H%M%S')
 
-#-------------------------------------------------------------------------------
-import pandas as pd 
-from datetime import datetime
-datetime_now = datetime.now().strftime('%Y%m%d_%H%M%S')
+    saleOrder_df = pd.DataFrame(data_dict)
 
-saleOrder_df = pd.DataFrame(data_dict)
-
-saleOrder_df.to_csv(fr'C:\Users\admin\Desktop\local_env_ppeline_project\raw_data\saleOrder_{datetime_now}.csv', index=False)
+    file_name = os.path.join(raw_data_folder, f'saleOrder_{datetime_now}.csv')
+    saleOrder_df.to_csv(file_name, index=False)
+    print(f'{count}: done created file: {file_name} ')
+print('DONE!')
 
 
 

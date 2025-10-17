@@ -13,7 +13,7 @@ def pg_connection():
     user = os.getenv('PG_USER')
     host = os.getenv('PG_HOST')
     password = os.getenv('PG_PASSWORD')
-    port = int(os.getenv('PG_HOST'))
+    port = int(os.getenv('PG_PORT'))
         
     #psycopg2 method
     pg_connect = psycopg2.connect(
