@@ -12,7 +12,7 @@ sqlalchemy
 
 pyaml 
 
-
+python-dotenv
 
 
 

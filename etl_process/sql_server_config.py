@@ -1,14 +1,19 @@
 import psycopg2
 from sqlalchemy import create_engine
 
+from dotenv import load_dotenv
+import os 
+
 # connect to postgresql 
 def pg_connection():
     
-    database = 'project1'
-    user = 'postgres'
-    host = 'localhost'
-    password = '123'
-    port = 5432
+    load_dotenv()   
+    
+    database = os.getenv('PG_DB') 
+    user = os.getenv('PG_USER')
+    host = os.getenv('PG_HOST')
+    password = os.getenv('PG_PASSWORD')
+    port = int(os.getenv('PG_HOST'))
         
     #psycopg2 method
     pg_connect = psycopg2.connect(
